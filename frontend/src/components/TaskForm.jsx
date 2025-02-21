@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 // src/components/TaskForm.jsx
 // You need to write the code for TaskForm component in the TaskForm.jsx file.
 
@@ -17,7 +18,7 @@ export default function TaskForm({ onTaskCreated }) {
     const handleChange=(e)=>{
         setFormData({
             ...formData,
-            [e.target.value]:e.target.value,
+            [e.target.name]:e.target.value,
         })
     }
 
