@@ -43,3 +43,28 @@ app.get('/tasks', async (req, res) => {
 
 // Write an endpoint to create a new task.
 
+app.post("/tasks",async(req,res) => {
+    try {
+        const { title, dueDate, priority, status } = req.body;
+
+        if(!title||!dueDate){
+            return res.status(400).json({ message: 'Title and due date are required' });
+        }
+
+        const newTask = new Task({
+            title,
+            dueDate,
+            priority: priority || 'Medium',
+            status: status || 'To Do'
+        });
+
+        const savedTask=await newTask.save()
+        res.status(201).json(savedTask)
+
+
+    } catch (error) {
+        console.error('Error creating task:', err);
+        res.status(500).json({ message: 'Server Error' });
+    }
+})
+
